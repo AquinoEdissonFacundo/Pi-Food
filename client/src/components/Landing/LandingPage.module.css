@@ -1,0 +1,49 @@
+.landing{
+    background-image: url('../../icons/homepage.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    
+}
+
+.bienvenido{
+    color: lightyellow;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-style: italic;
+    position:relative;
+    font-size: 115px;
+    background-color: rgba(0, 0, 0, 0.7); /* Fondo negro translúcido */
+    
+}
+
+/* .background {
+  background-image: url('../icons/palta.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  text-align: center;
+  height: 100px;
+  width: 150px;
+  position: relative;
+  padding: center;
+} */
+
+.btn {
+  background-image: url('../../icons/aguacate.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-color: transparent;
+  border: none;
+  height: 200px;
+  width: 200px;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out; 
+  }
+  
+  .btn:hover {
+    text-decoration: none;
+    transform: scale(1.5);
+  }
