@@ -1,49 +1,81 @@
-.landing{
-    background-image: url('../../icons/homepage.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
-    
-}
-
-.bienvenido{
-    color: lightyellow;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    font-style: italic;
-    position:relative;
-    font-size: 115px;
-    background-color: rgba(0, 0, 0, 0.7); /* Fondo negro translúcido */
-    
-}
-
-/* .background {
-  background-image: url('../icons/palta.png');
+.landing {
+  background-color: #171719;
+  background-size: cover;
   background-repeat: no-repeat;
-  background-size: contain;
-  text-align: center;
-  height: 100px;
-  width: 150px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.bienvenido {
+  color: lightyellow;
+  font-style: italic;
   position: relative;
-  padding: center;
-} */
+  font-size: 115px;
+}
 
-.btn {
-  background-image: url('../../icons/aguacate.png');
-  background-repeat: no-repeat;
-  background-size: contain;
-  background-color: transparent;
+.button {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #e8e8e8;
+  background-color: #212121;
+  width: 70px;
+  height: 70px;
+  font-size: 24px;
+  text-transform: uppercase;
   border: none;
-  height: 200px;
-  width: 200px;
+  border-radius: 50%;
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+  box-shadow: 5px 5px 2px rgba(0, 0, 0, 0.15),
+    2px 2px 2px rgba(0, 0, 0, 0.1),
+    -3px -3px 2px rgba(255, 255, 255, 0.05),
+    -2px -2px 1px rgba(255, 255, 255, 0.05);
+  overflow: hidden;
   cursor: pointer;
-  transition: transform 0.2s ease-in-out; 
+}
+
+.button::before {
+  content: "";
+  position: absolute;
+  background-color: #6865657b;
+  width: 150%;
+  height: 150%;
+  left: 0%;
+  bottom: 0%;
+  transform: translate(-100%, 100%) rotate(45deg);
+  border-radius: 15px;
+}
+
+.button:hover::before {
+  animation: shakeBack 0.6s forwards 0.2s;
+}
+
+.button:hover {
+  box-shadow: none;
+}
+
+.button:active {
+  scale: 0.95;
+}
+
+@keyframes shakeBack {
+  0% {
+    transform: translate(-100%, 100%) rotate(45deg);
   }
-  
-  .btn:hover {
-    text-decoration: none;
-    transform: scale(1.5);
+
+  50% {
+    transform: translate(15%, -15%) rotate(45deg);
   }
+
+  100% {
+    transform: translate(-10%, 10%) rotate(45deg);
+  }
+}

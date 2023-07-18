@@ -2,9 +2,7 @@ require('dotenv').config();
 const { Sequelize } = require('sequelize');
 const fs = require('fs');
 const path = require('path');
-const {
-  DB_USER, DB_PASSWORD, DB_HOST,
-} = process.env;
+const { DB_USER, DB_PASSWORD, DB_HOST } = process.env;
 
 const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/food`, {
   logging: false, // set to console.log to see the raw SQL queries
@@ -32,8 +30,8 @@ sequelize.models = Object.fromEntries(capsEntries);
 // Para relacionarlos hacemos un destructuring
 const { Recipe , TypeDiets} = sequelize.models;
 
-Recipe.belongsToMany(TypeDiets, {through: 'recipeTypeDiets'})
-TypeDiets.belongsToMany(Recipe, {through: 'recipeTypeDiets'})
+Recipe.belongsToMany(TypeDiets, {through: 'recipeTypeDiets', timestamps: false })
+TypeDiets.belongsToMany(Recipe, {through: 'recipeTypeDiets', timestamps: false })
 
 
 module.exports = {

@@ -29,7 +29,7 @@
     "redux": "^4.1.1",
     "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.3.0",
-    "sequelize": "^6.3.5"
+    "sequelize": "^6.32.1"
   },
   "devDependencies": {
     "chai": "^4.2.0",

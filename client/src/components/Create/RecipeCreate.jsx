@@ -7,7 +7,6 @@ import styles from './RecipeCreate.module.css';
 function controlForm(input) {
   let errors = {};
   const regexHealthScore = /^(100|[1-9]\d|\d)$/;
-  const regexImageUrl = /(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)/i;
 
   if (!input.title) errors.title = 'please put the title of the recipe';
   if (!input.summary) errors.summary = 'please put the summary of the recipe';
@@ -56,16 +55,20 @@ export default function CreateRecipe() {
     });
   }
 
-  async function handleSubmit(e) {
-    e.preventDefault();
+  async function handleSubmit(event) {
+    event.preventDefault();
     const { title, summary, healthScore, analyzedInstructions, typeDiets, image } = input;
+  
+  
+    const typeDietsAsString = typeDiets.join(',');
+  
     try {
       await dispatch(postRecipe({
         title,
         summary,
         healthScore,
         analyzedInstructions,
-        typeDiets: [typeDiets], // Convertimos el tipo de dieta en un array
+        typeDiets: typeDietsAsString, 
         image
       }));
       alert('Congratulations! You have created a new recipe!');
@@ -81,7 +84,6 @@ export default function CreateRecipe() {
       console.error('Error creating recipe:', error);
     }
   }
-
   function handleDelete(e) {
     setInput({
       ...input,

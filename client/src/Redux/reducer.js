@@ -1,20 +1,3 @@
-import {
-  ORDER_BY_SOURCE,
-  CLEAN_DETAIL,
-  GET_BY_ID,
-  GET_BY_NAME,
-  GET_RECIPES,
-  GET_TYPE_DIETS,
-  FILTER_BY_TYPEDIET,
-  ORDER_BY_NAME,
-  ORDER_BY_PUNTUATION,
-  POST_RECIPE,
-  RESET_RECIPES,
-  RESET_RECIPES_SEARCHED,
-  HANDLE_NUMBER,
-  PREV_PAGE,
-  NEXT_PAGE,
-} from "./actions";
 
 const initialState = {
   allRecipes: [],
@@ -84,31 +67,19 @@ function rootReducer(state = initialState, action) {
         recipes: action.payload === "API" ? fromApi : action.payload === "BDD" ? fromBDD : stateCopy,
       };
 
-    case 'ORDER_BY_NAME':
-      let order =
-        action.payload === "asc"
-          ? state.recipes.sort(function (a, b) {
-              if (a.title.toLowerCase() > b.title.toLowerCase()) {
-                return 1;
-              }
-              if (b.title.toLowerCase() > a.title.toLowerCase()) {
-                return -1;
-              }
-              return 0;
-            })
-          : state.recipes.sort(function (a, b) {
-              if (a.title.toLowerCase() > b.title.toLowerCase()) {
-                return -1;
-              }
-              if (b.title.toLowerCase() > a.title.toLowerCase()) {
-                return 1;
-              }
-              return 0;
-            });
-      return {
-        ...state,
-        recipes: order,
-      };
+      case 'ORDER_BY_NAME':
+        const sortedRecipes = state.recipes.slice().sort(function(a, b) {
+          if (action.payload === 'asc') {
+            return a.title.localeCompare(b.title);
+          } else {
+            return b.title.localeCompare(a.title, undefined, { numeric: true, sensitivity: 'base' });
+          }
+        });
+        return {
+          ...state,
+          recipes: sortedRecipes,
+        };
+      
 
     case 'ORDER_BY_PUNTUATION':
       let orderpunt =

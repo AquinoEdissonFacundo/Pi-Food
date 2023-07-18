@@ -10,29 +10,31 @@ next();
 } 
 
 const postRecipesHandler = async (req, res) => {
-    try {
-      const { title, summary, healthScore, analyzedInstructions, typeDiets, image } = req.body;
-const exists = await Recipe.findAll({ where:{title:title}})
-if(exists.length){
-    throw new Error("ya existe una receta con este nombre")
-} 
-      const newRecipe = await Recipe.create({
-        title,
-        summary,
-        healthScore,
-        analyzedInstructions,
-        image,
-        created: true
-      }); 
-    
-      newRecipe.addTypeDiets(typeDiets)
+  try {
+    const { title, summary, healthScore, analyzedInstructions, typeDiets, image } = req.body;
+    const exists = await Recipe.findAll({ where: { title: title } });
+    if (exists.length) {
+      throw new Error("There is already a recipe with this name");
+    }
 
-      res.status(200).json(newRecipe);
+    const newRecipe = await Recipe.create({
+      title,
+      summary,
+      healthScore,
+      analyzedInstructions,
+      image,
+      created: true
+    });
 
-    } catch (error) {
-      console.error(error);
-      res.status(400).send(error.message);
-    }} 
+    const typeDietIds = typeDiets.split(",").map(id => Number(id.trim()));
+    newRecipe.addTypeDiets(typeDietIds);
+
+    res.status(200).json(newRecipe);
+  } catch (error) {
+    console.error(error);
+    res.status(400).send(error.message);
+  }
+};
    
 
  const getRecipesByIdHandler = async (req, res) => {

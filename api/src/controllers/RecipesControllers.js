@@ -1,5 +1,5 @@
 const axios= require('axios');
-const{ Recipe, TypeDiets, recipeTypeDiets } = require('../db')
+const{ Recipe, TypeDiets, recipe } = require('../db')
 const { API_KEY } = process.env;
 const { Op } = require("sequelize")
 
@@ -19,19 +19,19 @@ return arr.map( (elem) =>{
      }})
 };
 const cleanArrayDB = (arr) => { 
-  return arr.map( (elem) =>{
+  return arr.map((elem) => {
     return {
-        id: elem.id, 
-        title: elem.title,
-        image: elem.image,
-        TypeDiets: elem.typeDiets?.map((d)=> {return{name:d}}),    
-        summary: elem.summary,                             
-        healthScore: elem.healthScore,                      
-        analyzedInstructions: elem.analyzedInstructions,   
-        created: false                                 
-       }})
-  };
-
+      id: elem.id, 
+      title: elem.title,
+      image: elem.image,
+      TypeDiets: elem.typeDiets?.map((d) => d.id),    
+      summary: elem.summary,                             
+      healthScore: elem.healthScore,                      
+      analyzedInstructions: elem.analyzedInstructions,   
+      created: false                                 
+    };
+  });
+};
 const getRecipesById = async (id) => {
   if (isNaN(+id)) {
     const recetaId = await Recipe.findByPk(id, {include: [{model: TypeDiets, through:{attributes:[]}}]})

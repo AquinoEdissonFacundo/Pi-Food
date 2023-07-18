@@ -16,11 +16,9 @@ import {
 import Card from "../Card/Card";
 import Paginate from "../Paginate/Paginate";
 import styles from "./Home.module.css";
-
 export default function Home() {
   const dispatch = useDispatch();
   const {
-    allRecipes,
     recipes,
     typeDiets,
     numPage,
@@ -41,7 +39,9 @@ export default function Home() {
   } else {
     viewRecipes = [];
   }
-
+  const handleRefresh = () => {
+    window.location.reload();
+  };
   useEffect(() => {
     dispatch(getRecipes());
     dispatch(getTypeDiets());
@@ -53,11 +53,12 @@ export default function Home() {
     dispatch(handleNumber(1));
   };
 
-  const handleOrderByName = (e) => {
-    setOrder(e.target.value);
-    dispatch(orderByName(e.target.value));
+  const handleOrderByName = (order) => {
+    setOrder(order);
+    dispatch(orderByName(order));
     dispatch(handleNumber(1));
   };
+  
 
   const handlePuntuation = (e) => {
     setOrder(e.target.value);
@@ -79,15 +80,16 @@ export default function Home() {
     dispatch(orderBySource(e.target.value));
     dispatch(handleNumber(1));
   };
-
   return (
-    <div className={styles.bkg}>
-      <div id={styles.navBar}>
+    <div className={styles.container}>
+      <div id={styles.navBar} className={styles.navBarContainer}>
+      <div className={styles.refreshContainer} onClick={handleRefresh} />
+
         <div className={styles.search}>
           <form onSubmit={handleSubmit}>
             <input
               type="text"
-              placeholder="¿Qué quieres buscar?"
+              placeholder="¿buscamos recetas?"
               value={search}
               onChange={handleInputName}
               className={styles.input}
@@ -97,36 +99,38 @@ export default function Home() {
             </button>
           </form>
         </div>
-
+  
         <div className={styles.filterC}>
           <Link to="/recipe">
-            <button className={styles.create}>Crear Receta</button>
+            <button>Crear Receta</button>
           </Link>
-
+  
           <div className={styles.filt}>
-            <select onChange={handleOrderByName} value={order} className={styles.select}>
-              <option value="asc">A-Z</option>
-              <option value="des">Z-A</option>
-            </select>
-          </div>
-
+  <button onClick={() => handleOrderByName("asc")} disabled={order === "asc"}>
+    A-Z
+  </button>
+  <button onClick={() => handleOrderByName("des")} disabled={order === "des"}>
+    Z-A
+  </button>
+</div>
+  
           <div>
-            <select className={styles.select} onChange={handleFromApi}>
+            <select onChange={handleFromApi}>
               <option value="ALL">ALL RECIPES</option>
               <option value="API">FROM API</option>
               <option value="BDD">FROM DATABASE</option>
             </select>
           </div>
-
+  
           <div>
-            <select onChange={handlePuntuation} value={order} className={styles.select}>
+            <select onChange={handlePuntuation} value={order}>
               <option value="mayormenor">mayor a menor health score</option>
               <option value="menormayor">menor a mayor health score</option>
             </select>
           </div>
-
+  
           <div>
-            <select onChange={handleFilterTypeDiet} value={typeDietFilter} className={styles.select}>
+            <select onChange={handleFilterTypeDiet} value={typeDietFilter}>
               <option value="All">Todas las recetas</option>
               {typeDiets.map((typeDiet) => (
                 <option key={typeDiet.name} value={typeDiet.name}>
@@ -137,9 +141,9 @@ export default function Home() {
           </div>
         </div>
       </div>
-
+  
       <Paginate cantPages={totalPages} numPage={numPage} />
-
+  
       {viewRecipes.length > 0 ? (
         <div className={styles.cards}>
           {viewRecipes.map((recipe) => (
@@ -150,9 +154,9 @@ export default function Home() {
         </div>
       ) : (
         <div className={styles.noRecipes}>
-         <h1> No hay recetas disponibles.</h1>
-         </div>
+          <h1> No hay recetas disponibles.</h1>
+        </div>
       )}
     </div>
   );
-}
+      };  
