@@ -18,11 +18,7 @@ import Paginate from "../Paginate/Paginate";
 import styles from "./Home.module.css";
 export default function Home() {
   const dispatch = useDispatch();
-  const {
-    recipes,
-    typeDiets,
-    numPage,
-  } = useSelector((state) => state);
+  const { recipes, typeDiets, numPage } = useSelector((state) => state);
   const [search, setSearch] = useState("");
   const [order, setOrder] = useState("");
   const [typeDietFilter, setTypeDietFilter] = useState("All");
@@ -58,7 +54,6 @@ export default function Home() {
     dispatch(orderByName(order));
     dispatch(handleNumber(1));
   };
-  
 
   const handlePuntuation = (e) => {
     setOrder(e.target.value);
@@ -83,7 +78,7 @@ export default function Home() {
   return (
     <div className={styles.container}>
       <div id={styles.navBar} className={styles.navBarContainer}>
-      <div className={styles.refreshContainer} onClick={handleRefresh} />
+        <div className={styles.refreshContainer} onClick={handleRefresh} />
 
         <div className={styles.search}>
           <form onSubmit={handleSubmit}>
@@ -99,21 +94,27 @@ export default function Home() {
             </button>
           </form>
         </div>
-  
+
         <div className={styles.filterC}>
           <Link to="/recipe">
-            <button  className={styles.button} >Crear Receta</button>
+            <button className={styles.button}>Crear Receta</button>
           </Link>
-  
-          <div className={styles.butaz} >
-  <button className={styles.Az} onClick={() => handleOrderByName("asc")} disabled={order === "asc"}>
-    A-Z
-  </button>
-  <button className={styles.Az} onClick={() => handleOrderByName("des")} disabled={order === "des"}>
-    Z-A
-  </button>
-</div>
-  
+
+            <button
+              className={styles.Az}
+              onClick={() => handleOrderByName("asc")}
+              disabled={order === "asc"}
+            >
+              A-Z
+            </button>
+            <button
+              className={styles.Az}
+              onClick={() => handleOrderByName("des")}
+              disabled={order === "des"}
+            >
+              Z-A
+            </button>
+
           <div>
             <select className={styles.filterrecipe} onChange={handleFromApi}>
               <option value="ALL">ALL RECIPES</option>
@@ -121,16 +122,24 @@ export default function Home() {
               <option value="BDD">FROM DATABASE</option>
             </select>
           </div>
-  
+
           <div>
-            <select className={styles.mayormenor} onChange={handlePuntuation} value={order}>
-              <option value="mayormenor">mayor a menor health score</option>
-              <option value="menormayor">menor a mayor health score</option>
+            <select
+              className={styles.mayormenor}
+              onChange={handlePuntuation}
+              value={order}
+            >
+              <option value="mayormenor">mayor a menor puntaje de salud</option>
+              <option value="menormayor">menor a mayor puntaje de salud</option>
             </select>
           </div>
-  
+
           <div>
-            <select  className={styles.allrecipes} onChange={handleFilterTypeDiet} value={typeDietFilter}>
+            <select
+              className={styles.allrecipes}
+              onChange={handleFilterTypeDiet}
+              value={typeDietFilter}
+            >
               <option value="All">Todas las recetas</option>
               {typeDiets.map((typeDiet) => (
                 <option key={typeDiet.name} value={typeDiet.name}>
@@ -141,14 +150,18 @@ export default function Home() {
           </div>
         </div>
       </div>
-  
+
       <Paginate cantPages={totalPages} numPage={numPage} />
-  
+
       {viewRecipes.length > 0 ? (
         <div className={styles.cards}>
           {viewRecipes.map((recipe) => (
             <Link to={"/recipes/" + recipe.id} key={recipe.id}>
-              <Card title={recipe.title} image={recipe.image} TypeDiets={recipe.TypeDiets} />
+              <Card
+                title={recipe.title}
+                image={recipe.image}
+                TypeDiets={recipe.TypeDiets}
+              />
             </Link>
           ))}
         </div>
@@ -159,4 +172,4 @@ export default function Home() {
       )}
     </div>
   );
-      };  
+}

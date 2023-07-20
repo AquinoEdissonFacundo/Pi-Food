@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { nextPage, prevPage } from '../../Redux/actions';
-import styles from './Paginate.module.css';
+import { nextPage, prevPage } from "../../Redux/actions";
+import styles from "./Paginate.module.css";
 
 const Paginate = ({ cantPages, numPage }) => {
   const dispatch = useDispatch();
@@ -33,7 +33,9 @@ const Paginate = ({ cantPages, numPage }) => {
         return (
           <div
             key={pageNumber}
-            className={`${styles.pageNumber} ${isActive ? styles.currentPageNumber : ''}`}
+            className={`${styles.pageNumber} ${
+              isActive ? styles.currentPageNumber : ""
+            }`}
           >
             {pageNumber}
           </div>

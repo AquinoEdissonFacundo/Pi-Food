@@ -3,7 +3,7 @@ import styles from "./Card.module.css";
 
 export default function Card({ title, image, TypeDiets, id }) {
   return (
-    <div className={styles.cardsContainer}> {/* Agregado */}
+    <div className={styles.cardsContainer}> 
       <div key={id} className={styles.card}>
         <div className={styles.cd}>
           <h3>{title}</h3>

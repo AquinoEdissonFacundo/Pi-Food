@@ -1,20 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { postRecipe, getTypeDiets } from '../../Redux/actions';
+import { postRecipe, getTypeDiets } from "../../Redux/actions";
 import { useDispatch, useSelector } from "react-redux";
-import styles from './RecipeCreate.module.css';
+import styles from "./RecipeCreate.module.css";
 
 function controlForm(input) {
   let errors = {};
   const regexHealthScore = /^(100|[1-9]\d|\d)$/;
 
-  if (!input.title) errors.title = 'please put the title of the recipe';
-  if (!input.summary) errors.summary = 'please put the summary of the recipe';
+  if (!input.title) errors.title = "please put the title of the recipe";
+  if (!input.summary) errors.summary = "please put the summary of the recipe";
   if (!regexHealthScore.test(input.healthScore))
-    errors.healthScore = 'put a healthScore between 0-100';
-    if (!input.image) errors.image = "please add an image to your recipe"; //modificar 
+    errors.healthScore = "put a healthScore between 0-100";
+  if (!input.image) errors.image = "please add an image to your recipe"; //modificar
   if (!input.typeDiets || input.typeDiets.length === 0)
-    errors.typeDiets = "please select at least one type of diet for your recipe";
+    errors.typeDiets =
+      "please select at least one type of diet for your recipe";
 
   return errors;
 }
@@ -25,12 +26,12 @@ export default function CreateRecipe() {
   let listDiets = useSelector((state) => state.typeDiets);
   const [errors, setErrors] = useState({});
   const [input, setInput] = useState({
-    title: '',
-    summary: '',
-    healthScore: '',
-    analyzedInstructions: '',
+    title: "",
+    summary: "",
+    healthScore: "",
+    analyzedInstructions: "",
     typeDiets: [],
-    image: ''
+    image: "",
   });
 
   useEffect(() => {
@@ -40,7 +41,7 @@ export default function CreateRecipe() {
   function handleChange(e) {
     setInput({
       ...input,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   }
 
@@ -51,43 +52,51 @@ export default function CreateRecipe() {
   function handleSelect(e) {
     setInput({
       ...input,
-      typeDiets: [...input.typeDiets, e.target.value]
+      typeDiets: [...input.typeDiets, e.target.value],
     });
   }
 
   async function handleSubmit(event) {
     event.preventDefault();
-    const { title, summary, healthScore, analyzedInstructions, typeDiets, image } = input;
-  
-  
-    const typeDietsAsString = typeDiets.join(',');
-  
+    const {
+      title,
+      summary,
+      healthScore,
+      analyzedInstructions,
+      typeDiets,
+      image,
+    } = input;
+
+    const typeDietsAsString = typeDiets.join(",");
+
     try {
-      await dispatch(postRecipe({
-        title,
-        summary,
-        healthScore,
-        analyzedInstructions,
-        typeDiets: typeDietsAsString, 
-        image
-      }));
-      alert('Congratulations! You have created a new recipe!');
+      await dispatch(
+        postRecipe({
+          title,
+          summary,
+          healthScore,
+          analyzedInstructions,
+          typeDiets: typeDietsAsString,
+          image,
+        })
+      );
+      alert("Congratulations! You have created a new recipe!");
       setInput({
-        title: '',
-        summary: '',
-        healthScore: '',
-        analyzedInstructions: '',
+        title: "",
+        summary: "",
+        healthScore: "",
+        analyzedInstructions: "",
         typeDiets: [],
-        image: ''
+        image: "",
       });
     } catch (error) {
-      console.error('Error creating recipe:', error);
+      console.error("Error creating recipe:", error);
     }
   }
   function handleDelete(e) {
     setInput({
       ...input,
-      typeDiets: input.typeDiets.filter((diet) => diet !== e)
+      typeDiets: input.typeDiets.filter((diet) => diet !== e),
     });
   }
 
@@ -129,7 +138,9 @@ export default function CreateRecipe() {
               value={input.healthScore}
               onChange={handleChange}
             />
-            {errors.healthScore && <p className={styles.error}>{errors.healthScore}</p>}
+            {errors.healthScore && (
+              <p className={styles.error}>{errors.healthScore}</p>
+            )}
           </div>
           <br />
           <div>
@@ -171,10 +182,18 @@ export default function CreateRecipe() {
               </div>
             );
           })}
-          {errors.title || errors.summary || errors.healthScore || errors.image || errors.typeDiets ? (
-            <p className={styles.adv}>Por favor,Complete todas las entradas para crear su receta.</p>
+          {errors.title ||
+          errors.summary ||
+          errors.healthScore ||
+          errors.image ||
+          errors.typeDiets ? (
+            <p className={styles.adv}>
+              Por favor,Complete todas las entradas para crear su receta.
+            </p>
           ) : (
-            <button type="submit" className={styles.correct}>Create Recipe</button>
+            <button type="submit" className={styles.correct}>
+              Create Recipe
+            </button>
           )}
         </form>
         <br />
