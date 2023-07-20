@@ -95,12 +95,12 @@ export default function CreateRecipe() {
     <div className={styles.bkg}>
       <div className={styles.container}>
         <Link to="/home">
-          <button className={styles.btn}>BACK TO HOME</button>
+          <button className={styles.btn}>Volver al Inicio</button>
         </Link>
-        <h1 className={styles.h1}>Create your own recipe!</h1>
+        <h1 className={styles.h1}>¡Crea tu propia receta!</h1>
         <form onSubmit={handleSubmit} className={styles.form}>
           <div>
-            <label>Name:</label>
+            <label>Nombre:</label>
             <input
               type="text"
               name="title"
@@ -109,9 +109,9 @@ export default function CreateRecipe() {
             />
             {errors.title && <p className={styles.error}>{errors.title}</p>}
           </div>
-          <hr></hr>
+          <br />
           <div>
-            <label>Summary:</label>
+            <label>Resumen:</label>
             <input
               type="text"
               name="summary"
@@ -120,7 +120,7 @@ export default function CreateRecipe() {
             />
             {errors.summary && <p className={styles.error}>{errors.summary}</p>}
           </div>
-          <hr></hr>
+          <br />
           <div>
             <label>Puntuación de salud:</label>
             <input
@@ -131,7 +131,7 @@ export default function CreateRecipe() {
             />
             {errors.healthScore && <p className={styles.error}>{errors.healthScore}</p>}
           </div>
-          <hr></hr>
+          <br />
           <div>
             <label>Image URL:</label>
             <input
@@ -142,9 +142,9 @@ export default function CreateRecipe() {
             />
             {errors.image && <p className={styles.error}>{errors.image}</p>}
           </div>
-          <hr></hr>
+          <br />
           <div>
-            <label>Step by step:</label>
+            <label>Paso a paso:</label>
             <input
               type="text"
               name="analyzedInstructions"
@@ -152,7 +152,7 @@ export default function CreateRecipe() {
               onChange={handleChange}
             />
           </div>
-          <hr></hr>
+          <br />
           <select onChange={handleSelect} className={styles.select}>
             {listDiets?.map((t) => (
               <option key={t.id} value={t.id}>
@@ -160,24 +160,24 @@ export default function CreateRecipe() {
               </option>
             ))}
           </select>
-          <hr></hr>
+          <br />
           {input.typeDiets.map((e) => {
             return (
               <div key={e}>
                 <h5 className={styles.types}>{e}</h5>
                 <button className={styles.btnx} onClick={() => handleDelete(e)}>
-                  X
+                  Eliminar
                 </button>
               </div>
             );
           })}
           {errors.title || errors.summary || errors.healthScore || errors.image || errors.typeDiets ? (
-            <p className={styles.adv}>Please complete all the inputs to create your recipe.</p>
+            <p className={styles.adv}>Por favor,Complete todas las entradas para crear su receta.</p>
           ) : (
             <button type="submit" className={styles.correct}>Create Recipe</button>
           )}
         </form>
-        <hr></hr>
+        <br />
       </div>
     </div>
   );

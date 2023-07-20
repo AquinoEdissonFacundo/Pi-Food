@@ -102,20 +102,20 @@ export default function Home() {
   
         <div className={styles.filterC}>
           <Link to="/recipe">
-            <button>Crear Receta</button>
+            <button  className={styles.button} >Crear Receta</button>
           </Link>
   
-          <div className={styles.filt}>
-  <button onClick={() => handleOrderByName("asc")} disabled={order === "asc"}>
+          <div className={styles.butaz} >
+  <button className={styles.Az} onClick={() => handleOrderByName("asc")} disabled={order === "asc"}>
     A-Z
   </button>
-  <button onClick={() => handleOrderByName("des")} disabled={order === "des"}>
+  <button className={styles.Az} onClick={() => handleOrderByName("des")} disabled={order === "des"}>
     Z-A
   </button>
 </div>
   
           <div>
-            <select onChange={handleFromApi}>
+            <select className={styles.filterrecipe} onChange={handleFromApi}>
               <option value="ALL">ALL RECIPES</option>
               <option value="API">FROM API</option>
               <option value="BDD">FROM DATABASE</option>
@@ -123,14 +123,14 @@ export default function Home() {
           </div>
   
           <div>
-            <select onChange={handlePuntuation} value={order}>
+            <select className={styles.mayormenor} onChange={handlePuntuation} value={order}>
               <option value="mayormenor">mayor a menor health score</option>
               <option value="menormayor">menor a mayor health score</option>
             </select>
           </div>
   
           <div>
-            <select onChange={handleFilterTypeDiet} value={typeDietFilter}>
+            <select  className={styles.allrecipes} onChange={handleFilterTypeDiet} value={typeDietFilter}>
               <option value="All">Todas las recetas</option>
               {typeDiets.map((typeDiet) => (
                 <option key={typeDiet.name} value={typeDiet.name}>

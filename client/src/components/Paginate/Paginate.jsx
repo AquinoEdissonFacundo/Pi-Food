@@ -15,7 +15,7 @@ const Paginate = ({ cantPages, numPage }) => {
   }
 
   if (!Number.isInteger(cantPages) || cantPages < 0) {
-    return null; // Otra opción sería mostrar un mensaje de error
+    return null; // Otra opción sería mostrar un mensaje de error <ErrorMessage message="Error: El número de páginas es inválido." />;
   }
 
   return (

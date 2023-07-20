@@ -1,10 +1,45 @@
 .container {
-  /* Estilos generales del contenedor principal */
-  background-color: black; /* Agrega el fondo negro al contenedor principal */
+  background-color: rgb(0, 0, 0); 
   padding: 10px;
-  color: rgb(236, 230, 230);
+  color: rgb(241, 237, 237);
+ margin: 0px;
+ height: 100%;
+ min-width: 400px;
 }
-
+.Az{
+  padding: 10px; 
+  border: none;
+  color: rgb(246, 236, 236);
+  background-color: rgb(133, 91, 91);
+  cursor: pointer;
+  height: 30px;
+  border-radius: 8px;
+  margin-bottom: 7px;
+}
+.filterrecipe{
+  padding: 10px; 
+  border: none;
+  background-color: rgb(133, 91, 91); 
+  color: rgb(234, 225, 225);
+  cursor: pointer;
+  border-radius: 15px;
+}
+.allrecipes{
+  padding: 10px; 
+  border: none;
+  background-color: rgb(133, 91, 91); 
+  color: rgb(234, 225, 225);
+  cursor: pointer;
+  border-radius: 15px;
+}
+.mayormenor{
+  padding: 10px; 
+  border: none;
+  background-color: rgb(133, 91, 91); 
+  color: rgb(234, 225, 225);
+  cursor: pointer;
+  border-radius: 15px;
+}
 .navBarContainer {
   display: flex;
   align-items: center;
@@ -38,17 +73,20 @@
 .btnsearch,
 .button,
 .select {
-  padding: 10px; /* Ajusta el relleno del botón */
+  padding: 10px; 
   border: none;
-  background-color: transparent; /* Quita el fondo del botón de búsqueda */
-  color: white;
+  background-color: rgb(133, 91, 91); 
+  color: rgb(238, 222, 222);
   cursor: pointer;
+  border-radius: 15px;
+
 }
 
 .cards {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
+  justify-content: center;
 }
 
 .noRecipes {
